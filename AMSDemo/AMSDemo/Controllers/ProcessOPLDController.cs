@@ -70,9 +70,12 @@ namespace AMSDemo.Controllers
                         log.Info(DateTime.Now.ToString() + " ArchivePath" + archiveFolderPath);
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
-                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        var destFile =  Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+
+
+                        if (!System.IO.File.Exists(destFile))
                         {
-                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                            System.IO.File.Move(fileName, destFile);
                         }
                         else
                         {
@@ -135,18 +138,36 @@ namespace AMSDemo.Controllers
                         }
 
                         fileStream.Close();
-                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
 
+                        //var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        //DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
+
+                        //if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        //{
+                        //    System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                        //}
+                        //else
+                        //{
+                        //    System.IO.File.Delete(fileName);
+                        //}
+
+                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+                        log.Info(DateTime.Now.ToString() + " ArchivePath" + archiveFolderPath);
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
-                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+
+
+                        if (!System.IO.File.Exists(destFile))
                         {
-                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                            System.IO.File.Move(fileName, destFile);
                         }
                         else
                         {
                             System.IO.File.Delete(fileName);
                         }
+
                     }
                 }
 
