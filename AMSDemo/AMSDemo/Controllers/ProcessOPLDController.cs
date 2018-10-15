@@ -112,7 +112,8 @@ namespace AMSDemo.Controllers
                                         }
                                         else
                                         {
-                                            log.Warn(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: Tracking number not found in DIALS data.");
+                                            log.Warn(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: Tracking number already exists in DIALS database.");
+                                            continue;
                                         }
                                     }
                                 }
