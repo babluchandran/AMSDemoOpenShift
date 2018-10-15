@@ -30,25 +30,7 @@ namespace AMSDemo.Controllers
                     {
                         log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD file Read in Progress.");
 
-                        string opldString = string.Empty;
-
-                        FileStream fileStream = new FileStream(Path.Combine(opldFolderPath, fileName), FileMode.Open);
-                        using (BufferedStream bufferedStream = new BufferedStream(fileStream))
-                        {
-                            using (StreamReader streamReader = new StreamReader(bufferedStream))
-                            {
-                                while (!streamReader.EndOfStream)
-                                {
-                                    opldString = streamReader.ReadToEnd();
-                                    break;
-                                }
-                            }
-                        }
-
-                        fileStream.Close();
-
-
-                        //string opldString = System.IO.File.ReadAllText(Path.Combine(opldFolderPath, fileName));
+                        string opldString = System.IO.File.ReadAllText(Path.Combine(opldFolderPath, fileName));
 
                         //Process OPLD data
                         var opldObject = OPLDUtility.ProcessOPLD(opldString);
@@ -86,10 +68,6 @@ namespace AMSDemo.Controllers
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
 
-                        //DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
-
-                        //var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
                         var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
@@ -101,14 +79,22 @@ namespace AMSDemo.Controllers
 
                         if (!System.IO.File.Exists(destFinalPath))
                         {
-                            System.IO.File.Move(fileName, destFinalPath);
+                            System.IO.File.Copy(fileName, destFinalPath);
+
+                            log.Info(DateTime.Now.ToString() + " Source OPLD File copied to archive");
+
+                            //System.IO.File.Move(fileName, destFinalPath);
+                            System.IO.File.Delete(fileName);
+
+                            log.Info(DateTime.Now.ToString() + " Source OPLD File delted from opldFiles");
                         }
                         else
                         {
                             System.IO.File.Delete(fileName);
                         }
-
                     }
+
+                    
                 }
             }
             catch (Exception ex)
