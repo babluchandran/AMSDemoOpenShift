@@ -37,7 +37,7 @@ namespace AMSDemo.Controllers
 
                         //Check is File already Processed
                         //SakilaContext context = new SakilaContext("server=127.0.01;port=3306;database=ams;user=root;password=techM@Ups1");                        
-                        SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=sakila;user=root;password=Password123");
+                        SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=ams;user=root;password=Password123");
 
                         //bool trackResult = context.CheckIsTrackingNumberAlreadyExists(opldObject.TrackingNumber);
                         //if (trackResult)
@@ -102,7 +102,7 @@ namespace AMSDemo.Controllers
                                         var dialsObject = DIALSUtility.ProcessDIALSData(dialsString);
 
                                         //SakilaContext context = new SakilaContext("server=127.0.01;port=3306;database=ams;user=root;password=techM@Ups1");
-                                        SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=sakila;user=root;password=Password123");
+                                        SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=ams;user=root;password=Password123");
                                         DIALS dials = context.GetMatchingDialsID(dialsObject.TrackingNumber);
 
                                         //Store in to DB
@@ -152,7 +152,7 @@ namespace AMSDemo.Controllers
             {
                 //Push OPLD in DB
                 //SakilaContext context = new SakilaContext("server=127.0.01;port=3306;database=ams;user=root;password=techM@Ups1");
-                SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=sakila;user=root;password=Password123");
+                SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=ams;user=root;password=Password123");
                 context.AddNewOPLD(opldObject);
 
                 log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD Data inserted in DB.");
@@ -177,7 +177,7 @@ namespace AMSDemo.Controllers
             try
             {
                 //SakilaContext context = new SakilaContext("server=127.0.01;port=3306;database=ams;user=root;password=techM@Ups1");
-                SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=sakila;user=root;password=Password123");
+                SakilaContext context = new SakilaContext("server=techm.cooavdyjxzoz.us-east-1.rds.amazonaws.com;port=3306;database=ams;user=root;password=Password123");
                 context.AddNewDIALS(dialsObject);
 
             }
