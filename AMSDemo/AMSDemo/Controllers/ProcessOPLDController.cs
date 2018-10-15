@@ -42,7 +42,7 @@ namespace AMSDemo.Controllers
                         //bool trackResult = context.CheckIsTrackingNumberAlreadyExists(opldObject.TrackingNumber);
                         //if (trackResult)
                         //{
-                        //    log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD file Read already processed.");
+                        //    log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD file already processed.");
                         //    continue;
                         //}
 
@@ -52,19 +52,33 @@ namespace AMSDemo.Controllers
                         MicroServiceProcessOPLDFile(opldObject);
 
                         log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD Message Pushed to MQ.");
-                        
-                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-                        
-                        DirectoryInfo directoryInfo =  Directory.CreateDirectory(archiveFolderPath);
 
-                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        //var archiveFolderPath =  Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        //DirectoryInfo directoryInfo =  Directory.CreateDirectory(archiveFolderPath);
+
+                        //if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        //{
+                        //    System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                        //}
+                        //else
+                        //{
+                        //    System.IO.File.Delete(fileName);
+                        //}
+
+                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
+
+                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//"))))
                         {
-                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//")));
                         }
                         else
                         {
                             System.IO.File.Delete(fileName);
                         }
+
                     }
                 }
             }
@@ -112,7 +126,7 @@ namespace AMSDemo.Controllers
                                         }
                                         else
                                         {
-                                            log.Warn(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: Tracking number already exists in DIALS database.");
+                                            log.Warn(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: Tracking number already exists.");
                                             continue;
                                         }
                                     }
