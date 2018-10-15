@@ -72,8 +72,8 @@ namespace AMSDemo.Controllers
 
                         var destFile =  Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
 
-                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + archiveFolderPath);
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + archiveFolderPath);
+                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + destFile);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + fileName);
 
                         if (!System.IO.File.Exists(destFile))
                         {
@@ -160,8 +160,8 @@ namespace AMSDemo.Controllers
 
                         var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
 
-                        log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + archiveFolderPath);
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + archiveFolderPath);
+                        log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFile);
 
                         if (!System.IO.File.Exists(destFile))
                         {
