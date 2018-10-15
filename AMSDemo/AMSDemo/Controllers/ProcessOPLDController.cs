@@ -16,7 +16,7 @@ namespace AMSDemo.Controllers
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
                 
-        public void OPLDFileWatcher()
+        public void OPLDFileWatcher1()
         {
             try
             {
@@ -79,13 +79,7 @@ namespace AMSDemo.Controllers
 
                         if (!System.IO.File.Exists(destFinalPath))
                         {
-                            System.IO.File.Copy(fileName, destFinalPath);
-
-                            log.Info(DateTime.Now.ToString() + " Source OPLD File copied to archive");
-
-                            //System.IO.File.Move(fileName, destFinalPath);
-                            System.IO.File.Delete(fileName);
-
+                            System.IO.File.Move(fileName, destFinalPath);
                             log.Info(DateTime.Now.ToString() + " Source OPLD File delted from opldFiles");
                         }
                         else
@@ -101,6 +95,79 @@ namespace AMSDemo.Controllers
             {
                 log.Error(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: " + Convert.ToString(ex.Message));
             }
+        }
+
+        public void OPLDFileWatcher()
+        {
+            try
+            {
+                var dialsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "OPLDFiles");
+
+                var files = Directory.GetFiles(dialsFolderPath);
+
+                if (files.Length > 0)
+                {
+                    foreach (string fileName in files)
+                    {
+                        log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: OPLD file Read in Progress.");
+                        FileStream fileStream = new FileStream(Path.Combine(dialsFolderPath, fileName), FileMode.Open);
+                        using (BufferedStream bufferedStream = new BufferedStream(fileStream))
+                        {
+                            using (StreamReader streamReader = new StreamReader(bufferedStream))
+                            {
+                                while (!streamReader.EndOfStream)
+                                {
+                                    string dialsString = streamReader.ReadLine();
+                                    
+                                }
+                            }
+                        }
+
+                        fileStream.Close();
+
+                        //var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        //DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
+
+                        //if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
+                        //{
+                        //    System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
+                        //}
+                        //else
+                        //{
+                        //    System.IO.File.Delete(fileName);
+                        //}
+
+                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
+
+                        var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+                        var destAPath = fileName.Substring(0, fileName.LastIndexOf("/"));
+                        var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive/" + destFile;
+
+                        log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " DIALS Desti Archive File Path" + destFinalPath);
+
+                        if (!System.IO.File.Exists(destFinalPath))
+                        {
+                            System.IO.File.Move(fileName, destFinalPath);
+                        }
+                        else
+                        {
+                            System.IO.File.Delete(fileName);
+                        }
+
+                    }
+                }
+
+                log.Info(DateTime.Now.ToString() + " AMS-POC-MicroServiceProcessOPLDNDIALSFiles: DIALS file processed and data inserted into DB.");
+            }
+            catch (Exception ex)
+            {
+                log.Error(DateTime.Now.ToString() + " AMS-MicroServiceProcessOPLDNDIALSFiles: " + Convert.ToString(ex.Message));
+            }
+
         }
 
         public void DIALSFileWatcher()
