@@ -70,14 +70,16 @@ namespace AMSDemo.Controllers
                         
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
-                        var destFile =  Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+                        var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+                        var destAPath = fileName.Substring(0, fileName.LastIndexOf("/"));
+                        var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive/" + destFile;                        
 
-                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + destFile);
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFinalPath);
 
-                        if (!System.IO.File.Exists(destFile))
+                        if (!System.IO.File.Exists(destFinalPath))
                         {
-                            System.IO.File.Move(fileName, destFile);
+                            System.IO.File.Move(fileName, destFinalPath);
                         }
                         else
                         {
@@ -155,17 +157,19 @@ namespace AMSDemo.Controllers
                         //}
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-                        
+
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
                         var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
+                        var destAPath = fileName.Substring(0, fileName.LastIndexOf("/"));
+                        var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive/" + destFile;
 
-                        log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + fileName);
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFile);
+                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFinalPath);
 
-                        if (!System.IO.File.Exists(destFile))
+                        if (!System.IO.File.Exists(destFinalPath))
                         {
-                            System.IO.File.Move(fileName, destFile);
+                            System.IO.File.Move(fileName, destFinalPath);
                         }
                         else
                         {
