@@ -67,17 +67,19 @@ namespace AMSDemo.Controllers
                         //}
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-                        
+
                         //DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
+
+                        var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
+
+                        DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
                         var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
                         var destAPath = fileName.Substring(0, fileName.LastIndexOf("/"));
+                        var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive/" + destFile;
 
-                        var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive" + destFile;
-
-                        var destFinalPath1 = Path.Combine(destAPath.Substring(0, destAPath.LastIndexOf("/")) , "Archive" , destFile);
-
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFinalPath1);
+                        log.Info(DateTime.Now.ToString() + " Source OPLD File Path" + fileName);
+                        log.Info(DateTime.Now.ToString() + " OPLD Desti Archive File Path" + destFinalPath);
 
                         if (!System.IO.File.Exists(destFinalPath))
                         {
@@ -167,7 +169,7 @@ namespace AMSDemo.Controllers
                         var destFinalPath = destAPath.Substring(0, destAPath.LastIndexOf("/")) + "/Archive/" + destFile;
 
                         log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + fileName);
-                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + destFinalPath);
+                        log.Info(DateTime.Now.ToString() + " DIALS Desti Archive File Path" + destFinalPath);
 
                         if (!System.IO.File.Exists(destFinalPath))
                         {
