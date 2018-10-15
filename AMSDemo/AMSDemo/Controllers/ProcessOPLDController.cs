@@ -67,11 +67,13 @@ namespace AMSDemo.Controllers
                         //}
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-                        log.Info(DateTime.Now.ToString() + " ArchivePath" + archiveFolderPath);
+                        
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
                         var destFile =  Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
 
+                        log.Info(DateTime.Now.ToString() + " Source OPld File Path" + archiveFolderPath);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + archiveFolderPath);
 
                         if (!System.IO.File.Exists(destFile))
                         {
@@ -153,11 +155,13 @@ namespace AMSDemo.Controllers
                         //}
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-                        log.Info(DateTime.Now.ToString() + " ArchivePath" + archiveFolderPath);
+                        
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
                         var destFile = Path.Combine(archiveFolderPath, fileName.Substring(fileName.LastIndexOf("/")));
 
+                        log.Info(DateTime.Now.ToString() + " Source DIALS File Path" + archiveFolderPath);
+                        log.Info(DateTime.Now.ToString() + " Desti Archive File Path" + archiveFolderPath);
 
                         if (!System.IO.File.Exists(destFile))
                         {
