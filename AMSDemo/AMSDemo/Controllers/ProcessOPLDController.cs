@@ -67,12 +67,12 @@ namespace AMSDemo.Controllers
                         //}
 
                         var archiveFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Archive");
-
+                        log.Info(DateTime.Now.ToString() + " ArchivePath" + archiveFolderPath);
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
-                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//"))))
+                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
                         {
-                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//")));
+                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
                         }
                         else
                         {
@@ -139,9 +139,9 @@ namespace AMSDemo.Controllers
 
                         DirectoryInfo directoryInfo = Directory.CreateDirectory(archiveFolderPath);
 
-                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//"))))
+                        if (!System.IO.File.Exists(archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\"))))
                         {
-                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("//")));
+                            System.IO.File.Move(fileName, archiveFolderPath + fileName.Substring(fileName.LastIndexOf("\\")));
                         }
                         else
                         {
