@@ -19,9 +19,6 @@ RUN chmod -R a+rwx /app/Archive
 ADD DIALSFiles /app/DIALSFiles
 RUN chmod -R a+rwx /app/DIALSFiles
 
-#ADD Archive /app/Archive
-RUN chmod -R a+rwx /app/Archive
-
 ADD OPLDFiles /app/OPLDFiles
 RUN chmod -R a+rwx /app/OPLDFiles
 
