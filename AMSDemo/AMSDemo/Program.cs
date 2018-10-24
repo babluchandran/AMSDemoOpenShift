@@ -65,4 +65,5 @@ namespace AMSDemo
                 .UseStartup<Startup>()
                 .UseUrls("http://*:8080");
     }
+    
 }
