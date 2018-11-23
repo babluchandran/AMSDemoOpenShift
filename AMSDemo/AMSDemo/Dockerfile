@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
-# copy csproj and restore as distinct layers
+# copy csproj and restore as distinct layers--chenge and commit
 COPY *.csproj ./
 RUN dotnet restore
 
