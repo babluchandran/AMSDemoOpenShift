@@ -27,4 +27,5 @@ RUN chmod -R 777 /app/Logs
 #RUN mkdir /app/Archive
 COPY --from=build-env /app/out .
 EXPOSE 8080/tcp
+
 ENTRYPOINT ["dotnet", "AMSDemo.dll"]
